@@ -11,6 +11,9 @@ do
          if  [[ $line =~ \.png$ ]]
            then
            echo "${line} is a the card's nb ${c} pict"
+         elif [[ $line =~ \.name$ ]]
+           then
+           echo "${line} is a the card's nb ${c} name file "
          elif  [[ $line =~ \.tel$ ]]
            then
            echo "${line} is a the card's nb ${c} phone data "
