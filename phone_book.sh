@@ -8,21 +8,25 @@ do
     do
       if [[ $line = $c* ]]
         then
-         if  [[ $line =~ \.png$ ]]
+         if  [[ $line =~ \.name$ ]]
+           then
+           echo "${line} is a the card's nb ${c} name :"
+           cat "people/${line}"
+         elif  [[ $line =~ \.png$ ]]
            then
            echo "${line} is a the card's nb ${c} pict"
-         elif [[ $line =~ \.name$ ]]
-           then
-           echo "${line} is a the card's nb ${c} name file "
          elif  [[ $line =~ \.tel$ ]]
            then
-           echo "${line} is a the card's nb ${c} phone data "
+           echo "${line} is a the card's nb ${c} phone data :"
+            cat "people/${line}"
          elif [[ $line =~ \.work$ ]]
            then
-           echo "${line} is a the card's nb ${c} job description"
+           echo "${line} is a the card's nb ${c} job description :"
+            cat "people/${line}"
          elif  [[ $line =~ \.add$ ]]
            then
-           echo "${line} is a the card's nb ${c} address"
+           echo "${line} is a the card's nb ${c} address :"
+            cat "people/${line}"
          else
            echo "${line} is something i dont know "
          fi
