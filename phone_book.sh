@@ -8,6 +8,9 @@ ls people -1 | while read line;
         elif [[ $line =~ \.tel$ ]]
          then
           echo "${line} is a phone file "
+        elif [[ $line =~ \.name$ ]]
+         then
+          echo "${line} is a name file "
         elif [[ $line =~ \.work$ ]]
          then
           echo "${line} is a job desc file "
