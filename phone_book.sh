@@ -51,6 +51,8 @@ do
          esac
        fi
     done
+    echo "<br />" >>people/phone_book.html
+    echo "<br />" >>people/phone_book.html
 done
 echo "
 </body>
