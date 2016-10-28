@@ -1,9 +1,9 @@
 # Groupe C
 
-  - Idée n°1:  Rangement des informations
-  - Idée n°2:  Rajouter l'explication de chaque termes devan
-  - Idée n°3:  Classer les personnes par ordre alphabétiques
-  - Idéee n°4: Gérer un nombre certains de profils par pages
-  - Idée n°5:  Verification des doublons
-  - Idée n°6:  Validité des informations
-  - Idée n°7:  Allégée le code
+  - Idée n°1:  Ranger les informations
+  - Idée n°2:  Rajouter l'explication de chaque termes devant
+  - Idée n°3:  Classer les personnes par ordre alphabétique
+  - Idée n°4:  Afficher un certain nombre de contact par page
+  - Idée n°5:  Verifier les doublons
+  - Idée n°6:  Valider les informations
+  - Idée n°7:  Alléger le code
