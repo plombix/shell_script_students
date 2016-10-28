@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # num_of_files=$( ls -l people | wc -l )
-echo "saisir num_of_files"
+echo "Saisir num_of_files"
 read num_of_files
 
 touch "people/phone_book.html"
@@ -21,33 +21,35 @@ do
       if [[ $line = $c* ]]
         then
          case $line in
-           *.name) 
-              echo "$line is a the card's nb $c name :"
-              name=$(cat "people/$line")
-              echo "<p class='fn'><a class='url' href='http://www.google.com/search?q=${name}'>${name}</a><p>">> people/phone_book.html
-            ;;
-           *.work)
-              echo "$line is a the card's nb $c job description :"
-              cat "people/$line"
-              job=$(cat "people/$line")
-              wikijob=$(cat "people/$line" | sed 's/ /+/g')
-              echo "<p class='fn'><a class='url' href='https://fr.wikipedia.org/w/index.php?search=${wikijob}'>${job}</a><p>">> people/phone_book.html
-            ;;
-            *.png)
+           *.png)
               echo "$line is a the card's nb $c pict"
-              echo "<img src='$line' alt='${name}' height='100' width='100'>">> people/phone_book.html
+              echo "<img src='$line' alt='${name}' style='float: left;display: block;margin-top: -5%;' height='120' width='120'>" >> people/phone_book.html
             ;;
             *.add)
               echo "$line is a the card's nb $c address :"
               cat "people/$line"
               add=$(cat "people/$line")
-              echo "<p class='adr'>${add}</p>">> people/phone_book.html
+              googlemaps=$(cat "people/$line" | sed 's/ /+/g')
+              echo "<p class='add'>Adresse : <b><a class='url' style='text-decoration:none;' target='_blank' href='https://www.google.fr/maps/place/${googlemaps}'>${add}</a></b></p>" >> people/phone_book.html
+            ;;
+            *.name) 
+              echo "$line is a the card's nb $c name :"
+              name=$(cat "people/$line")
+              echo "<p class='pn'>Prénom / Nom : <a class='url' style='text-decoration:none;' target='_blank' href='http://www.google.com/search?q=${name}'><b>${name}</b></a><p>" >> people/phone_book.html
             ;;
             *.tel)
               echo "$line is a the card's nb $c phone data :"
               cat "people/$line"
               tel=$(cat -e "people/$line" | sed  's/\$/<br>/g')
-              echo "<p class='tel'>${tel}</p>" >> people/phone_book.html
+              call=$(cat "people/$line")
+              echo "<p class='tel'>Numéro : <a href='tel:${call}'><b>${tel}</b></a></p>" >> people/phone_book.html
+            ;;
+            *.work)
+              echo "$line is a the card's nb $c job description :"
+              cat "people/$line"
+              job=$(cat "people/$line")
+              wikijob=$(cat "people/$line" | sed 's/ /+/g')
+              echo "<p class='job'>Job : <a class='url' style='text-decoration:none;' target='_blank' href='https://fr.wikipedia.org/w/index.php?search=${wikijob}'><b>${job}</b></a><p><hr />" >> people/phone_book.html
             ;;
             *)
               echo "$line is something i dont know "
