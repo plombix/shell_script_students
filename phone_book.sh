@@ -16,37 +16,39 @@ do
     do
       if [[ $line = $c* ]]
         then
-         if  [[ $line =~ \.name$ ]]
-           then
+        case $line in
+          *name)
            echo "$line is a the card's nb $c name :"
            name=$(cat "people/$line")
            echo "<p class='fn'>Nom, prenom: <a class='url' href='http://www.google.com/search?q=${name}'>${name}</a><p>">> people/phone_book.html
-         elif [[ $line =~ \.work$ ]]
-           then
+           ;;
+          *work)
            echo "$line is a the card's nb $c job description :"
             cat "people/$line"
             job=$(cat "people/$line")
             wikijob=$(cat "people/$line" | sed 's/ /+/g')
             echo "<p class='fn'>Métier: <a class='url' href='https://fr.wikipedia.org/w/index.php?search=${wikijob}'>${job}</a><p>">> people/phone_book.html
-         elif  [[ $line =~ \.png$ ]]
-           then
-           echo "$line is a the card's nb $c pict"
+            ;;
+          *png)
+            echo "$line is a the card's nb $c pict"
             echo "<img src='$line' alt='${name}' height='100' width='100'>">> people/phone_book.html
-         elif  [[ $line =~ \.add$ ]]
-           then
+            ;;
+         *add)
            echo "$line is a the card's nb $c address :"
             cat "people/$line"
             add=$(cat "people/$line")
             echo "<p class='adr'>Adresse: ${add}</p>">> people/phone_book.html
-         elif  [[ $line =~ \.tel$ ]]
-           then
+            ;;
+         *tel)
            echo "$line is a the card's nb $c phone data :"
             cat "people/$line"
             tel=$(cat -e "people/$line" | sed  's/\$/<br>/g')
             echo "<p class='tel'>Numéro de téléphone: ${tel}</p>" >> people/phone_book.html
-         else
+            ;;
+          *)
            echo "$line is something i dont know "
-         fi
+           ;;
+         esac
        fi
     done
 done
