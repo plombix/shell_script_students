@@ -9,7 +9,6 @@
 #    Updated: 2016/07/06 13:37:24 by sballet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 # !/usr/bin/env ruby -w
 begin
   require 'ffaker'
@@ -17,14 +16,19 @@ rescue LoadError
   system('gem install ffaker')
   Gem.clear_paths
 end
+begin
+  require 'urss'
+rescue LoadError
+  system('gem install urss')
+  Gem.clear_paths
+end
 require 'fileutils'
 require 'open-uri'
-
+require 'pry'
 # Get vars
 #===============================================================================
 current_path = Dir.pwd
 people_path = File.join(current_path, 'people')
-
 # If no args
 #===============================================================================
 if ARGV.empty?
@@ -35,7 +39,6 @@ if ARGV.empty?
   puts "labeled by number suffixed by type and place in a folder 'people'"
   puts "\truby random_people.rb clean"
   puts 'clean will clean the content of the people folder previously created'
-
 # if clean
 #===============================================================================
 elsif ARGV[0] == 'clean'
@@ -51,7 +54,6 @@ elsif ARGV[0] == 'clean'
   else
     puts "No 'people' folder to clean , generate some first!"
   end
-
 # if num
 #===============================================================================
 elsif begin
@@ -59,15 +61,16 @@ elsif begin
        rescue
          false
        end
-
   # make folder & path
   Dir.mkdir('people') unless File.exist?('people')
   people_path = File.join(current_path, 'people')
-
+  URL = 'http://www.flickr.com/services/feeds/photos_public.gne?format=rss_200'
   # make files and move in folder
   custom_range.times do |tm|
     puts "Generating nb: #{tm}"
-    pict = File.new("#{tm}.png", 'wb') << open(FFaker::Avatar.image).read
+    rss = Urss.at(URL); true
+    pict_url = rss.entries.first.medias.first.content_url
+    pict = File.new("#{tm}.jpg", 'wb') << open(pict_url).read
     File.rename(File.join(current_path, pict.path), File.join(people_path,
                                                               pict.path))
     File.open("#{tm}.add", 'a+') do |f|
