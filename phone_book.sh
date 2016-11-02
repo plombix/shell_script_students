@@ -21,9 +21,9 @@ do
       if [[ $line = $c* ]]
         then
          case $line in
-           *.png)
+           *.jpg)
               echo "$line is a the card's nb $c pict"
-              echo "<img src='$line' alt='${name}' style='float: left;display: block;margin-top: -5%;' height='120' width='120'>" >> people/phone_book.html
+              echo "<img src='$line' alt='${name}' style='float: left;display: block;margin-top: -5%;' height='80' width='80'>" >> people/phone_book.html
             ;;
             *.add)
               echo "$line is a the card's nb $c address :"
