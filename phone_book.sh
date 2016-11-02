@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # search through files of names and print info based on id of match ,himself coded with *

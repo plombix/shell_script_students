@@ -9,7 +9,6 @@
 #    Updated: 2016/07/06 13:37:24 by sballet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 # !/usr/bin/env ruby -w
 begin
   require 'ffaker'
@@ -26,12 +25,14 @@ end
 require 'fileutils'
 require 'open-uri'
 require 'pry'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10c3305b664909931f789641b1ee4ed67b4dee3c
 # Get vars
 #===============================================================================
 current_path = Dir.pwd
 people_path = File.join(current_path, 'people')
-
 # If no args
 #===============================================================================
 if ARGV.empty?
@@ -42,7 +43,6 @@ if ARGV.empty?
   puts "labeled by number suffixed by type and place in a folder 'people'"
   puts "\truby random_people.rb clean"
   puts 'clean will clean the content of the people folder previously created'
-
 # if clean
 #===============================================================================
 elsif ARGV[0] == 'clean'
@@ -58,7 +58,6 @@ elsif ARGV[0] == 'clean'
   else
     puts "No 'people' folder to clean , generate some first!"
   end
-
 # if num
 #===============================================================================
 elsif begin
@@ -66,16 +65,21 @@ elsif begin
        rescue
          false
        end
-
   # make folder & path
   Dir.mkdir('people') unless File.exist?('people')
   people_path = File.join(current_path, 'people')
-
+  URL = 'http://www.flickr.com/services/feeds/photos_public.gne?format=rss_200'
   # make files and move in folder
   rss = Urss.at('http://www.flickr.com/services/feeds/photos_public.gne?format=rss_200'); true
   custom_range.times do |tm|
     puts "Generating nb: #{tm}"
+<<<<<<< HEAD
     pict = File.new("#{tm}.jpg", 'wb') << open(rss.entries.first.medias.first.content_url).read
+=======
+    rss = Urss.at(URL); true
+    pict_url = rss.entries.first.medias.first.content_url
+    pict = File.new("#{tm}.jpg", 'wb') << open(pict_url).read
+>>>>>>> 10c3305b664909931f789641b1ee4ed67b4dee3c
     File.rename(File.join(current_path, pict.path), File.join(people_path,
                                                               pict.path))
     File.open("#{tm}.add", 'a+') do |f|
