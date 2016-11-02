@@ -13,22 +13,18 @@
 begin
   require 'ffaker'
 rescue LoadError
-  system('gem install ffaker')
+  system('gem install ffaker --user-install')
   Gem.clear_paths
 end
 begin
   require 'urss'
 rescue LoadError
-  system('gem install urss')
+  system('gem install urss --user-install')
   Gem.clear_paths
 end
 require 'fileutils'
 require 'open-uri'
-require 'pry'
-<<<<<<< HEAD
 
-=======
->>>>>>> 10c3305b664909931f789641b1ee4ed67b4dee3c
 # Get vars
 #===============================================================================
 current_path = Dir.pwd
