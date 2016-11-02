@@ -17,8 +17,15 @@ rescue LoadError
   system('gem install ffaker')
   Gem.clear_paths
 end
+begin
+  require 'urss'
+rescue LoadError
+  system('gem install urss')
+  Gem.clear_paths
+end
 require 'fileutils'
 require 'open-uri'
+require 'pry'
 
 # Get vars
 #===============================================================================
@@ -65,9 +72,10 @@ elsif begin
   people_path = File.join(current_path, 'people')
 
   # make files and move in folder
+  rss = Urss.at('http://www.flickr.com/services/feeds/photos_public.gne?format=rss_200'); true
   custom_range.times do |tm|
     puts "Generating nb: #{tm}"
-    pict = File.new("#{tm}.png", 'wb') << open(FFaker::Avatar.image).read
+    pict = File.new("#{tm}.jpg", 'wb') << open(rss.entries.first.medias.first.content_url).read
     File.rename(File.join(current_path, pict.path), File.join(people_path,
                                                               pict.path))
     File.open("#{tm}.add", 'a+') do |f|
